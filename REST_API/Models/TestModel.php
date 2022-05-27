@@ -3,19 +3,31 @@ require_once PROJECT_ROOT_PATH."/Models/Database.php";
  
 class TestModel extends Database
 {
-    public function getTests()
+    public function readTests()
     {
-        return $this->select("SELECT * FROM test");
+        return $this->get("SELECT * FROM tests");
     }
     
-    public function getTestsX($x)
+    /*public function readTestsX($x)
     {
-        return $this->select("SELECT * FROM test WHERE number=".$x.";");
-    }
+        return $this->get("SELECT * FROM test WHERE number=".$x.";");
+    }*/
     
-    public function postTest($value)
+    public function createTest($value)
     {
-        return $this->insert("INSERT INTO test (number) "
+        //return $this->post("INSERT INTO tests (text) VALUES ('{$value}');");
+        return $this->post("INSERT INTO tests (text) "
                 ."VALUES ('{$value}')");
     }
+    
+    public function updateTest($id,$value)
+    {
+        return $this->post("UPDATE tests SET text = '{$value}' WHERE id ='{$id}'");
+    }
+    
+    public function deleteTest($id)
+    {
+        return $this->post("DELETE FROM tests WHERE id='{$id}'");
+    }
+    
 }

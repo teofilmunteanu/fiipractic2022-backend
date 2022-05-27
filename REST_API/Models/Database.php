@@ -1,5 +1,7 @@
 <?php
-class Database{
+
+class Database
+{
     protected $connection = null;
  
     public function __construct()
@@ -39,7 +41,7 @@ class Database{
     
     /**********************************************************************/
  
-    public function select($query = "" , $params = [])
+    public function get($query = "" , $params = [])
     {
         try {
             $statement = $this->execute($query , $params);
@@ -53,4 +55,20 @@ class Database{
         }
         return false;
     }  
+    
+    public function post($query = "" , $params = [])
+    {
+        try {
+            $statement = $this->execute($query , $params);             
+            $statement->close();
+ 
+            return true;
+        } 
+        catch(Exception $e) {
+            throw New Exception( $e->getMessage() );
+        }
+        return false;
+    }  
+    
+    
 }

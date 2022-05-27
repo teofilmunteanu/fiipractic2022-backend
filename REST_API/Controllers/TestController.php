@@ -13,7 +13,7 @@ class TestController extends BaseController
             try {
                 $testModel = new TestModel();
                 
-                $arrTests = $testModel->getTests();
+                $arrTests = $testModel->readTests();
                 $responseData = json_encode($arrTests);
             } catch (Error $e) {
                 $strErrorDesc = $e->getMessage().' Something went wrong! Please contact support. ';
@@ -37,7 +37,7 @@ class TestController extends BaseController
         }
     }
     
-    public function listX()
+    /*public function listX()
     {
         $strErrorDesc = '';
         $requestMethod = $_SERVER["REQUEST_METHOD"];
@@ -47,7 +47,7 @@ class TestController extends BaseController
             try {
                 $testModel = new TestModel(); 
                 
-                $arrTests = $testModel->getTestsX($queryParams['x']);
+                $arrTests = $testModel->readTestsX($queryParams['x']);
                 $responseData = json_encode($arrTests);
             } catch (Error $e) {
                 $strErrorDesc = $e->getMessage().' Something went wrong! Please contact support. ';
@@ -69,5 +69,23 @@ class TestController extends BaseController
                 array('Content-Type: application/json', $strErrorHeader)
             );
         }
+    }*/
+    
+    public function create($value)
+    {
+        $testModel = new TestModel(); 
+        $testModel->createTest($value);
+    }
+    
+    public function update($id, $value)
+    {
+        $testModel = new TestModel(); 
+        $testModel->updateTest($id, $value);
+    }
+    
+    public function delete($id)
+    {
+        $testModel = new TestModel(); 
+        $testModel->deleteTest($id);
     }
 }
